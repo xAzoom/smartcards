@@ -1,0 +1,10 @@
+parameters:
+    level: max
+    paths:
+        - src
+        - tests
+
+    tmpDir: var/phpstan/cache
+
+    autoload_files:
+            - bin/.phpunit/phpunit-7.5-0/vendor/autoload.php
