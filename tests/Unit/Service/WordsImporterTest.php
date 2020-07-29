@@ -13,6 +13,7 @@ use PHPUnit\Framework\TestCase;
 class WordsImporterTest extends TestCase
 {
     /**
+     * @param array[] $expectedWord
      * @dataProvider wordsProvider
      */
     public function testImportFromTextTOWordDTO(string $text, array $expectedWord): void
@@ -24,7 +25,7 @@ class WordsImporterTest extends TestCase
         $this->assertEqualsCanonicalizing($expectedWord, $word);
     }
 
-    public function testImportFromTextToUnrecognisedWordClass()
+    public function testImportFromTextToUnrecognisedWordClass(): void
     {
         $wordsImporter = new WordsImporter();
         $this->expectException(UnrecognisedWordClassException::class);
@@ -35,7 +36,7 @@ class WordsImporterTest extends TestCase
     /**
      * @dataProvider invalidTextProvider
      */
-    public function testImportFromInvalidText(string $text)
+    public function testImportFromInvalidText(string $text): void
     {
         $wordsImporter = new WordsImporter();
         $this->expectException(InvalidRowFormatException::class);
@@ -43,6 +44,9 @@ class WordsImporterTest extends TestCase
         $wordsImporter->transformTextToWords($text, WordDTO::class);
     }
 
+    /**
+     * @return array[]
+     */
     public function wordsProvider(): array
     {
         return [
@@ -58,6 +62,9 @@ class WordsImporterTest extends TestCase
         ];
     }
 
+    /**
+     * @return array[]
+     */
     public function invalidTextProvider(): array
     {
         return [
